@@ -27,7 +27,7 @@ component inverter
 end component;
 
 signal top_path_0, top_path_1, top_path_2 : STD_LOGIC;
-signal bot_path_0, bot_path_2, bot_path_3 : STD_LOGIC;
+signal bot_path_0, bot_path_1, bot_path_2 : STD_LOGIC;
 signal mux0_out, mux1_out, mux2_out : STD_LOGIC;
 
 --these attributes keep the tools from optimizing the inverters away
