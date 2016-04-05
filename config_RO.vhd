@@ -11,9 +11,9 @@ entity config_oscillator is
 	Port ( 
 			enable : in STD_LOGIC;
 			control_bit_0: in STD_LOGIC; 
-			contorl_bit_1: in STD_LOGIC;
+			control_bit_1: in STD_LOGIC;
 			control_bit_2 : in STD_LOGIC;
-			output_bit out : STD_LOGIC
+			output_bit :  out STD_LOGIC
 		);
 end config_oscillator;
 
@@ -29,6 +29,7 @@ end component;
 signal top_path_0, top_path_1, top_path_2 : STD_LOGIC;
 signal bot_path_0, bot_path_1, bot_path_2 : STD_LOGIC;
 signal mux0_out, mux1_out, mux2_out : STD_LOGIC;
+signal enable_out   : STD_LOGIC;
 
 --these attributes keep the tools from optimizing the inverters away
 attribute KEEP : string;
@@ -61,10 +62,11 @@ mux1_out <= top_path_1 when control_bit_1 = '1' else bot_path_1;
 --Stage 2
 inverter_top_2 : inverter PORT MAP(mux1_out, top_path_2);
 inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
-mux2_out <= top_path_2 when control_bit_2 = '1' else bot_path_2
+mux2_out <= top_path_2 when control_bit_2 = '1' else bot_path_2;
 
 --Output
 output_bit <= mux2_out;
 
 
 end Behavioral;
+
