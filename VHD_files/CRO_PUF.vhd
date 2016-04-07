@@ -42,11 +42,4 @@ begin
     --Choose which CROs to use based on challenge bit (This probably needs to be extended to have more than 
     --4 possible challenges. 
     --Challenge 1
-
-    
-    
-    
-    
-    
-    
 end Behavioral;

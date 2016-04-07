@@ -12,4 +12,3 @@ architecture Behavioral of inverter is
 begin
 b <= not a;
 end Behavioral;
-

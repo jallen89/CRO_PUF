@@ -10,9 +10,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity config_oscillator is
 	Port ( 
 			enable : in STD_LOGIC;
-			control_bit_0: in STD_LOGIC; 
-			control_bit_1: in STD_LOGIC;
-			control_bit_2 : in STD_LOGIC;
+			control_bit: in STD_LOGIC_VECTOR (2 downto 0); 
 			output_bit :  out STD_LOGIC
 		);
 end config_oscillator;
@@ -52,21 +50,20 @@ enable_out <= enable AND mux2_out;
 --Stage 0
 inverter_top_0 : inverter PORT MAP(enable_out, top_path_0);
 inverter_bot_0 : inverter PORT MAP(enable_out, bot_path_0);
-mux0_out <= top_path_0 when control_bit_0 = '1' else bot_path_0;
+mux0_out <= top_path_0 when control_bit(0) = '1' else bot_path_0;
 
 --Stage 1
 inverter_top_1 : inverter PORT MAP(mux0_out, top_path_1);
 inverter_bot_1 : inverter PORT MAP(mux0_out, bot_path_1);
-mux1_out <= top_path_1 when control_bit_1 = '1' else bot_path_1;
+mux1_out <= top_path_1 when control_bit(1) = '1' else bot_path_1;
 
 --Stage 2
 inverter_top_2 : inverter PORT MAP(mux1_out, top_path_2);
 inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
-mux2_out <= top_path_2 when control_bit_2 = '1' else bot_path_2;
+mux2_out <= top_path_2 when control_bit(2) = '1' else bot_path_2;
 
 --Output
 output_bit <= mux2_out;
 
 
 end Behavioral;
-
