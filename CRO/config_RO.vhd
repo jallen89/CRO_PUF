@@ -37,10 +37,10 @@ attribute KEEP of top_path_2: signal is "true";
 attribute KEEP of bot_path_0: signal is "true";
 attribute KEEP of bot_path_1: signal is "true";
 attribute KEEP of bot_path_2: signal is "true";
-attribute KEEP of mux0_out: signal is "true";
-attribute KEEP of mux1_out: signal is "true";
-attribute KEEP of mux2_out: signal is "true";
-attribute KEEP of enable_out: signal is "true";
+--attribute KEEP of mux0_out: signal is "true";
+--attribute KEEP of mux1_out: signal is "true";
+--attribute KEEP of mux2_out: signal is "true";
+--attribute KEEP of enable_out: signal is "true";
 
 begin
 
