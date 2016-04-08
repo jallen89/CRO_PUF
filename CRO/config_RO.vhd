@@ -37,33 +37,67 @@ attribute KEEP of top_path_2: signal is "true";
 attribute KEEP of bot_path_0: signal is "true";
 attribute KEEP of bot_path_1: signal is "true";
 attribute KEEP of bot_path_2: signal is "true";
---attribute KEEP of mux0_out: signal is "true";
---attribute KEEP of mux1_out: signal is "true";
---attribute KEEP of mux2_out: signal is "true";
---attribute KEEP of enable_out: signal is "true";
+attribute KEEP of mux0_out: signal is "true";
+attribute KEEP of mux1_out: signal is "true";
+attribute KEEP of mux2_out: signal is "true";
+attribute KEEP of enable_out: signal is "true";
 
 begin
 
+ inverter_top_0 : inverter PORT MAP(enable_out, top_path_0);
+        inverter_bot_0 : inverter PORT MAP(enable_out, bot_path_0);
+       inverter_top_1 : inverter PORT MAP(mux0_out, top_path_1);
+        inverter_bot_1 : inverter PORT MAP(mux0_out, bot_path_1);
+        inverter_top_2 : inverter PORT MAP(mux1_out, top_path_2);
+        inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
+
+  stage: process (control_bit)
+  begin    
 --Enable Stage 
 enable_out <= enable AND mux2_out;
 
 --Stage 0
-inverter_top_0 : inverter PORT MAP(enable_out, top_path_0);
-inverter_bot_0 : inverter PORT MAP(enable_out, bot_path_0);
-mux0_out <= top_path_0 when control_bit(0) = '1' else bot_path_0;
-
---Stage 1
-inverter_top_1 : inverter PORT MAP(mux0_out, top_path_1);
-inverter_bot_1 : inverter PORT MAP(mux0_out, bot_path_1);
-mux1_out <= top_path_1 when control_bit(1) = '1' else bot_path_1;
-
---Stage 2
-inverter_top_2 : inverter PORT MAP(mux1_out, top_path_2);
-inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
-mux2_out <= top_path_2 when control_bit(2) = '1' else bot_path_2;
-
+case control_bit is
+    when "000"=>
+        mux2_out <= bot_path_2;
+        mux1_out <= bot_path_1;
+        mux0_out <= bot_path_0;
+    
+    when "001" => 
+        mux2_out <= bot_path_2;
+        mux1_out <= bot_path_1;
+        mux0_out <= top_path_0;
+    when "010" => 
+        mux2_out <= bot_path_2;
+        mux1_out <= top_path_1;
+        mux0_out <= bot_path_0;
+    when "011" => 
+        mux2_out <= bot_path_2;
+        mux1_out <= top_path_1;
+        mux0_out <= top_path_0;
+   when "100" =>
+        mux2_out <= top_path_2;
+        mux1_out <= bot_path_1;
+        mux0_out <= bot_path_0;
+    when "101" =>
+        mux2_out <= top_path_2;
+        mux1_out <= bot_path_1;
+        mux0_out <= top_path_0;
+    when "110"=>
+        mux2_out <= top_path_2;
+        mux1_out <= top_path_1;
+        mux0_out <= bot_path_0;
+    when "111"=>
+        mux2_out <= top_path_2;
+        mux1_out <= top_path_1;
+        mux0_out <= top_path_0;
+    when others => 
+    mux2_out <= bot_path_2;
+            mux1_out <= bot_path_1;
+            mux0_out <= top_path_0;
+    end case;
 --Output
 output_bit <= mux2_out;
-
+end process;
 
 end Behavioral;
