@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="uart_top_test_func_synth.wdb" id="1">
+         <top_modules>
+            <top_module name="uart_top_test" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="6" />
+   <wvobject db_ref_id="1" fp_name="/uart_top_test/lclk" type="logic">
+      <obj_property name="ElementShortName">lclk</obj_property>
+      <obj_property name="ObjectShortName">lclk</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/uart_top_test/reset_l" type="logic">
+      <obj_property name="ElementShortName">reset_l</obj_property>
+      <obj_property name="ObjectShortName">reset_l</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/uart_top_test/RX" type="logic">
+      <obj_property name="ElementShortName">RX</obj_property>
+      <obj_property name="ObjectShortName">RX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/uart_top_test/TX" type="logic">
+      <obj_property name="ElementShortName">TX</obj_property>
+      <obj_property name="ObjectShortName">TX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/uart_top_test/freq" type="other">
+      <obj_property name="ElementShortName">freq</obj_property>
+      <obj_property name="ObjectShortName">freq</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/uart_top_test/baud" type="other">
+      <obj_property name="ElementShortName">baud</obj_property>
+      <obj_property name="ObjectShortName">baud</obj_property>
+   </wvobject>
+</wave_config>
