@@ -44,60 +44,50 @@ attribute KEEP of enable_out: signal is "true";
 
 begin
 
- inverter_top_0 : inverter PORT MAP(enable_out, top_path_0);
-        inverter_bot_0 : inverter PORT MAP(enable_out, bot_path_0);
-       inverter_top_1 : inverter PORT MAP(mux0_out, top_path_1);
-        inverter_bot_1 : inverter PORT MAP(mux0_out, bot_path_1);
-        inverter_top_2 : inverter PORT MAP(mux1_out, top_path_2);
-        inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
+inverter_top_0 : inverter PORT MAP(enable_out, top_path_0);
+inverter_bot_0 : inverter PORT MAP(enable_out, bot_path_0);
+inverter_top_1 : inverter PORT MAP(mux0_out, top_path_1);
+inverter_bot_1 : inverter PORT MAP(mux0_out, bot_path_1);
+inverter_top_2 : inverter PORT MAP(mux1_out, top_path_2);
+inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
 
-  stage: process (control_bit)
-  begin    
---Enable Stage 
+ --Enable Stage 
 enable_out <= enable AND mux2_out;
 
 --Stage 0
-case control_bit is
-    when "000"=>
-        mux2_out <= bot_path_2;
-        mux1_out <= bot_path_1;
-        mux0_out <= bot_path_0;
-    
-    when "001" => 
-        mux2_out <= bot_path_2;
-        mux1_out <= bot_path_1;
-        mux0_out <= top_path_0;
-    when "010" => 
-        mux2_out <= bot_path_2;
-        mux1_out <= top_path_1;
-        mux0_out <= bot_path_0;
-    when "011" => 
-        mux2_out <= bot_path_2;
-        mux1_out <= top_path_1;
-        mux0_out <= top_path_0;
-   when "100" =>
-        mux2_out <= top_path_2;
-        mux1_out <= bot_path_1;
-        mux0_out <= bot_path_0;
-    when "101" =>
-        mux2_out <= top_path_2;
-        mux1_out <= bot_path_1;
-        mux0_out <= top_path_0;
-    when "110"=>
-        mux2_out <= top_path_2;
-        mux1_out <= top_path_1;
-        mux0_out <= bot_path_0;
-    when "111"=>
-        mux2_out <= top_path_2;
-        mux1_out <= top_path_1;
-        mux0_out <= top_path_0;
-    when others => 
-    mux2_out <= bot_path_2;
-            mux1_out <= bot_path_1;
+stage_0: process(control_bit(0))
+begin
+    case control_bit(0) is
+        when '1' => 
             mux0_out <= top_path_0;
+        when '0' =>
+            mux0_out <= bot_path_0;
     end case;
---Output
-output_bit <= mux2_out;
 end process;
+    
+--Stage 1
+stage_1: process(control_bit(1))
+begin
+    case control_bit(1) is
+        when '1' => 
+            mux1_out <= top_path_1;
+        when '0' =>
+            mux1_out <= bot_path_1;
+    end case;
+end process;
+    
+ --Stage 2
+stage_2: process(control_bit(2))
+begin
+    case control_bit(2) is
+        when '1' => 
+            mux2_out <= top_path_2;
+        when '0' =>
+            mux2_out <= bot_path_2;
+    end case;
+end process;  
+
+--output
+output_bit <= mux2_out;
 
 end Behavioral;
