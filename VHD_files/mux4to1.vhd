@@ -9,8 +9,8 @@ end mux4to1;
 
 architecture Behavioral of mux4to1 is
 begin
-    output <= input(0) when s = "00" else
-              input(1) when s = "01" else
-              input(2) when s = "10" else
-              input(3) when s = "11";
+    output <= inputs(0) when s = "00" else
+              inputs(1) when s = "01" else
+              inputs(2) when s = "10" else
+              inputs(3) when s = "11";
 end Behavioral;
