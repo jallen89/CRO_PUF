@@ -55,7 +55,7 @@ inverter_bot_2 : inverter PORT MAP(mux1_out, bot_path_2);
 enable_out <= enable AND mux2_out;
 
 --Stage 0
-stage_0: process(control_bit(0))
+stage_0: process(control_bit(0), top_path_0, bot_path_0)
 begin
     case control_bit(0) is
         when '1' => 
@@ -66,7 +66,7 @@ begin
 end process;
     
 --Stage 1
-stage_1: process(control_bit(1))
+stage_1: process(control_bit(1), top_path_1, bot_path_1)
 begin
     case control_bit(1) is
         when '1' => 
@@ -77,7 +77,7 @@ begin
 end process;
     
  --Stage 2
-stage_2: process(control_bit(2))
+stage_2: process(control_bit(2), top_path_2, bot_path_2)
 begin
     case control_bit(2) is
         when '1' => 
