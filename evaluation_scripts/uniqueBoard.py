@@ -1,4 +1,4 @@
-from pandas import DataFrame
+from pandas import DataFrame, read_csv
 import pandas
 import itertools
 import numpy
@@ -6,7 +6,7 @@ from scipy.spatial.distance import hamming
 
 
 #Import data
-dataSet = pandas.read_csv("../data/CRPairs_results.csv")
+dataSet = read_csv("../data/CRPairs_results.csv")
 
 #split data by board
 J = [column for column in dataSet.columns if column[0] is "J"]
@@ -21,7 +21,6 @@ MdataSet = dataSet[M]
 JdataSet.columns = [int(column[1]) for column in JdataSet.columns]
 PdataSet.columns = [int(column[1]) for column in PdataSet.columns]
 MdataSet.columns = [int(column[1]) for column in MdataSet.columns]
-
 
 #calculate uniqueness for each time domain on each board
 uniqueList = list()

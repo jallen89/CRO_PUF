@@ -17,8 +17,9 @@ for fpga in fpgas:
 	fpga.columns = [int(column[1]) for column in fpga.columns]
 
 #calulate uniqueness for each clock domain.
-params = 8
+m = 8
 n = 120
+
 uniqueList = list()
 for fpga in fpgas:
 	clockDomains = range(0,7)
